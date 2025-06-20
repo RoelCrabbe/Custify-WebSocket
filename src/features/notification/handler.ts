@@ -1,3 +1,4 @@
+import { broadcastMessage, sendMessageToUser } from '@middleware/connection';
 import { NotificationType } from '@notification/enums';
 import { NotificationMessage } from '@notification/notification';
 import { WebSocketContext } from '@types';
@@ -11,10 +12,26 @@ export const validateNewNotification = (
 ): NotificationMessage | null => {
     if (msg.type !== NotificationType.NewNotification || typeof msg.content !== 'string') {
         logMessage('INVALID_FORMAT', 'Missing or invalid content', clientIP, msg);
-        ws.send(JSON.stringify({ error: 'Invalid format' }));
+        ws.send(JSON.stringify({ error: 'Invalid format: missing or invalid content' }));
         return null;
     }
-    return msg as NotificationMessage;
+
+    if (msg.recipientId !== undefined) {
+        if (typeof msg.recipientId !== 'number' || msg.recipientId <= 0) {
+            logMessage('INVALID_FORMAT', 'Invalid recipientId format', clientIP, msg);
+            ws.send(
+                JSON.stringify({ error: 'Invalid format: recipientId must be a positive number' }),
+            );
+            return null;
+        }
+    }
+
+    return {
+        type: msg.type,
+        content: msg.content,
+        timestamp: msg.timestamp,
+        recipientId: msg.recipientId,
+    } as NotificationMessage;
 };
 
 export const handleNewNotification = (ctx: WebSocketContext, msg: any): void => {
@@ -29,15 +46,20 @@ export const handleNewNotification = (ctx: WebSocketContext, msg: any): void => 
         clientIP,
     );
 
-    wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(
-                JSON.stringify({
-                    type: NotificationType.NewNotification,
-                    content: notificationMsg.content,
-                    timestamp: new Date().toISOString(),
-                }),
-            );
-        }
-    });
+    if (notificationMsg.recipientId) {
+        sendMessageToUser(notificationMsg.recipientId, {
+            type: NotificationType.NewNotification,
+            content: notificationMsg.content,
+            timestamp: new Date().toISOString(),
+        });
+    } else {
+        broadcastMessage(
+            {
+                type: NotificationType.NewNotification,
+                content: notificationMsg.content,
+                timestamp: new Date().toISOString(),
+            },
+            wss,
+        );
+    }
 };
