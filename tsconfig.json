@@ -14,8 +14,6 @@
             "@middleware": ["middleware/messageRouter.ts"],
             "@handlers/*": ["middleware/*"],
             "@handlers": ["middleware/messageRouter.ts"],
-            "@card/*": ["features/card/*"],
-            "@card": ["features/card/index.ts"],
             "@notification/*": ["features/notification/*"],
             "@notification": ["features/notification/index.ts"]
         },

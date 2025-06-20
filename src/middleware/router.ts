@@ -1,5 +1,3 @@
-import { CardScanType } from '@card/enums';
-import { cardHandler } from '@card/index';
 import { NotificationType } from '@notification/enums';
 import { notificationHandler } from '@notification/index';
 import { ClientMessage, WebSocketContext } from '@types';
@@ -17,8 +15,6 @@ export const handleMessage = (ctx: WebSocketContext, rawStr: string): void => {
     const msg: ClientMessage = JSON.parse(rawStr);
 
     switch (msg.type) {
-        case CardScanType.Scanned:
-            return cardHandler.handleCardScanned(ctx, msg);
         case NotificationType.NewNotification:
             return notificationHandler.handleNewNotification(ctx, msg);
         default:
