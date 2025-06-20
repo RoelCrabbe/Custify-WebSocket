@@ -1,0 +1,8 @@
+# Ignore Package
+node_modules
+
+# Ignore Environment 
+.env
+
+# Ignore VS code folder
+/.vscode/

@@ -1,0 +1,27 @@
+{
+    "name": "@roelcrabbe/custify-websocket",
+    "version": "0.0.1",
+    "description": "Custify – A simple, modern CRM for startups built.",
+    "author": "Roel Crabbé",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/RoelCrabbe/Custify-React"
+    },
+    "scripts": {
+        "start": "npx ts-node server.ts",
+        "format": "prettier --write ."
+    },
+    "dependencies": {
+        "dotenv": "^16.5.0",
+        "ws": "^8.18.2"
+    },
+    "devDependencies": {
+        "@types/node": "^22.15.21",
+        "@types/ws": "^8.18.1",
+        "prettier": "^3.5.3",
+        "prettier-plugin-organize-imports": "^4.1.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3"
+    }
+}
