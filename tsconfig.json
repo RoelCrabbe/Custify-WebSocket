@@ -15,7 +15,9 @@
             "@handlers/*": ["middleware/*"],
             "@handlers": ["middleware/messageRouter.ts"],
             "@card/*": ["features/card/*"],
-            "@card": ["features/card/index.ts"]
+            "@card": ["features/card/index.ts"],
+            "@notification/*": ["features/notification/*"],
+            "@notification": ["features/notification/index.ts"]
         },
         "skipLibCheck": true,
         "strict": true,

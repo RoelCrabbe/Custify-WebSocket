@@ -1,4 +1,7 @@
-import { cardHandler, CardScan } from '@card';
+import { CardScanType } from '@card/enums';
+import { cardHandler } from '@card/index';
+import { NotificationType } from '@notification/enums';
+import { notificationHandler } from '@notification/index';
 import { ClientMessage, WebSocketContext } from '@types';
 import { isJSONStringObject, logMessage } from 'shared';
 
@@ -14,8 +17,10 @@ export const handleMessage = (ctx: WebSocketContext, rawStr: string): void => {
     const msg: ClientMessage = JSON.parse(rawStr);
 
     switch (msg.type) {
-        case CardScan.Scanned:
+        case CardScanType.Scanned:
             return cardHandler.handleCardScanned(ctx, msg);
+        case NotificationType.NewNotification:
+            return notificationHandler.handleNewNotification(ctx, msg);
         default:
             logMessage('UNKNOWN_TYPE', 'Unknown message type', clientIP, msg);
             ws.send(JSON.stringify({ error: 'Unknown message type' }));

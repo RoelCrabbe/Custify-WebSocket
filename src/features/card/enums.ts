@@ -1,6 +1,6 @@
-export const CardScan = {
+export const CardScanType = {
     Scanned: 'card-scan',
     Display: 'card-display',
 } as const;
 
-export type CardScan = (typeof CardScan)[keyof typeof CardScan];
+export type CardScanType = (typeof CardScanType)[keyof typeof CardScanType];
