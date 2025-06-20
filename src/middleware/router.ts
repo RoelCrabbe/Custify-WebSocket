@@ -1,5 +1,5 @@
+import { cardHandler, CardScan } from '@card';
 import { ClientMessage, WebSocketContext } from '@types';
-import { handleCardScan } from 'handlers';
 import { isJSONStringObject, logMessage } from 'shared';
 
 export const handleMessage = (ctx: WebSocketContext, rawStr: string): void => {
@@ -14,9 +14,8 @@ export const handleMessage = (ctx: WebSocketContext, rawStr: string): void => {
     const msg: ClientMessage = JSON.parse(rawStr);
 
     switch (msg.type) {
-        case 'card-scan':
-            return handleCardScan(ctx, msg);
-
+        case CardScan.Scanned:
+            return cardHandler.handleCardScanned(ctx, msg);
         default:
             logMessage('UNKNOWN_TYPE', 'Unknown message type', clientIP, msg);
             ws.send(JSON.stringify({ error: 'Unknown message type' }));

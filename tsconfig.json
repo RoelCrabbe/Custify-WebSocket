@@ -13,7 +13,9 @@
             "@middleware/*": ["middleware/*"],
             "@middleware": ["middleware/messageRouter.ts"],
             "@handlers/*": ["middleware/*"],
-            "@handlers": ["middleware/messageRouter.ts"]
+            "@handlers": ["middleware/messageRouter.ts"],
+            "@card/*": ["features/card/*"],
+            "@card": ["features/card/index.ts"]
         },
         "skipLibCheck": true,
         "strict": true,

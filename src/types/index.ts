@@ -10,8 +10,3 @@ export interface ClientMessage {
     type: string;
     [key: string]: any;
 }
-
-export interface CardScanMessage extends ClientMessage {
-    type: 'card-scan';
-    cardId: string;
-}
