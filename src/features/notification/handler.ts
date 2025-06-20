@@ -1,6 +1,5 @@
 import { broadcastMessage, sendMessageToUser } from '@middleware/connection';
-import { NotificationType } from '@notification/enums';
-import { NotificationMessage } from '@notification/notification';
+import { NotificationMessage, NotificationType } from '@notification';
 import { WebSocketContext } from '@types';
 import { logMessage } from 'shared';
 import { WebSocket } from 'ws';
@@ -29,7 +28,6 @@ export const validateNewNotification = (
     return {
         type: msg.type,
         content: msg.content,
-        timestamp: msg.timestamp,
         recipientId: msg.recipientId,
     } as NotificationMessage;
 };

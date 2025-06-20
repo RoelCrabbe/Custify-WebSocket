@@ -1,5 +1,4 @@
-import { NotificationType } from '@notification/enums';
-import { notificationHandler } from '@notification/index';
+import { notificationHandler, NotificationType } from '@notification';
 import { ClientMessage, WebSocketContext } from '@types';
 import { isJSONStringObject, logMessage } from 'shared';
 
