@@ -1,0 +1,3 @@
+{
+    "ignoreMatches": ["@utils*", "@types*", "@middleware*", "@handlers*"]
+}

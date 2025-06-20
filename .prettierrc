@@ -4,5 +4,8 @@
     "printWidth": 100,
     "bracketSameLine": true,
     "tabWidth": 4,
-    "useTabs": false
+    "useTabs": false,
+    "endOfLine": "lf",
+    "semi": true,
+    "bracketSpacing": true
 }

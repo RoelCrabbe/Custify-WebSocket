@@ -1,10 +1,25 @@
 {
     "compilerOptions": {
-        "target": "es2016",
-        "module": "commonjs",
+        "baseUrl": "./src",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
+        "module": "CommonJS",
+        "outDir": "./dist",
+        "paths": {
+            "@types": ["types/index.ts"],
+            "@types/*": ["types/*"],
+            "@utils/*": ["shared/utils/*"],
+            "@utils": ["shared/utils/index.ts"],
+            "@middleware/*": ["middleware/*"],
+            "@middleware": ["middleware/messageRouter.ts"],
+            "@handlers/*": ["middleware/*"],
+            "@handlers": ["middleware/messageRouter.ts"]
+        },
+        "skipLibCheck": true,
         "strict": true,
-        "skipLibCheck": true
-    }
+        "target": "ES2020",
+        "types": ["node"]
+    },
+    "exclude": ["node_modules", "dist"],
+    "include": ["src/**/*.ts", "app.ts"]
 }
